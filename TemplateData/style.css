@@ -35,7 +35,7 @@ body::before {
     width: 100% !important;
     height: 100% !important;
     max-width: calc(100vh * (9 / 16)) !important;
-    background-color: rgba(226, 232, 253, 1); 
+    background-color: rgba(226, 232, 253, 1);
     box-shadow: 0px 0px 20px rgba(0,0,0,0.7); 
 }
 
@@ -122,6 +122,7 @@ body::before {
     border-image-slice: 48 84 84 84 fill;
     border-image-width: 32% 7.7% 54.5% 7.7%;
     border-image-repeat: stretch;
+    container-type: inline-size;
 }
 
 #unity-progress-bar-full {
@@ -130,11 +131,13 @@ body::before {
     top: 9%; 
     bottom: 32%;
     left: 3.5%;
+    min-width: 11cqi; 
 
     border-image-source: url('../LoadingAssets/loading_bar_filler.png');
     border-image-slice: 32 56 32 56 fill;
-    border-image-width: 31% 5.5% 31% 5.5%;
+    border-image-width: 31% 5.5cqi 31% 5.5cqi;     
     border-image-repeat: stretch;
+    
     transform: scale(1.01);
     transition: width 0.1s ease-out;
 }

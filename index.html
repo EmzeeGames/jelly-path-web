@@ -10,14 +10,14 @@
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" tabindex="-1"></canvas>
       <div id="unity-loading-screen">
-          <img id="game-title" src="LoadingAssets/game_title.png" alt="Jelly Path title">
-          <div id="loading-center-stack">
-              <img id="center-top-img" src="LoadingAssets/jelly_sleeping.png" alt="Jelly character">
-              <img id="center-bottom-img" src="LoadingAssets/tile_block.png" alt="Tile platform">
-          </div>
-          <div id="unity-progress-bar-empty">
-              <div id="unity-progress-bar-full"></div>
-          </div>
+        <img id="game-title" src="LoadingAssets/game_title.png" alt="Jelly Path title">
+        <div id="loading-center-stack">
+          <img id="center-top-img" src="LoadingAssets/jelly_sleeping.png" alt="Jelly character">
+          <img id="center-bottom-img" src="LoadingAssets/tile_block.png" alt="Tile platform">
+        </div>
+        <div id="unity-progress-bar-empty">
+          <div id="unity-progress-bar-full"></div>
+        </div>
       </div>
       <div id="unity-warning"> </div>
       <div id="unity-footer">
@@ -79,16 +79,16 @@
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           document.querySelector("#unity-progress-bar-full").style.width = 93 * progress + "%";
-              }).then((unityInstance) => {
-              }).catch((message) => {
-                alert(message);
-              });
-            };
+        }).then((unityInstance) => {
+        }).catch((message) => {
+          alert(message);
+        });
+      };
 
       document.body.appendChild(script);
       
       window.HideUnityLoadingScreen = function() {
-          document.querySelector("#unity-loading-screen").style.display = "none";
+        document.querySelector("#unity-loading-screen").style.display = "none";
       };
     </script>
   </body>
