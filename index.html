@@ -90,6 +90,15 @@
       window.HideUnityLoadingScreen = function() {
         document.querySelector("#unity-loading-screen").style.display = "none";
       };
+
+      document.body.addEventListener('pointerup', function() {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(err => console.log("Fullscreen skipped"));
+        }        
+        if ('wakeLock' in navigator) {
+          navigator.wakeLock.request('screen').catch(err => console.log("Wake Lock skipped"));
+        }
+      }, { once: true });
     </script>
   </body>
 </html>

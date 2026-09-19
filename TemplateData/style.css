@@ -33,7 +33,7 @@ body::before {
 
 #unity-canvas {
     width: 100% !important;
-    height: 100% !important;
+    height: 100dvh !important;
     max-width: calc(100vh * (9 / 16)) !important;
     background-color: rgba(226, 232, 253, 1);
     box-shadow: 0px 0px 20px rgba(0,0,0,0.7); 
@@ -137,7 +137,7 @@ body::before {
     border-image-slice: 32 56 32 56 fill;
     border-image-width: 31% 5.5cqi 31% 5.5cqi;     
     border-image-repeat: stretch;
-    
+
     transform: scale(1.01);
     transition: width 0.1s ease-out;
 }
