@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Jelly Path</title>
+    <link rel="stylesheet" href="TemplateData/style.css">
+  </head>
+  <body>
+    <div id="unity-container" class="unity-desktop">
+      <canvas id="unity-canvas" tabindex="-1"></canvas>
+      <div id="unity-loading-screen">
+          <img id="game-title" src="LoadingAssets/game_title.png" alt="Jelly Path title">
+          <div id="loading-center-stack">
+              <img id="center-top-img" src="LoadingAssets/jelly_sleeping.png" alt="Jelly character">
+              <img id="center-bottom-img" src="LoadingAssets/tile_block.png" alt="Tile platform">
+          </div>
+          <div id="unity-progress-bar-empty">
+              <div id="unity-progress-bar-full"></div>
+          </div>
+      </div>
+      <div id="unity-warning"> </div>
+      <div id="unity-footer">
+      </div>
+    </div>
+    <script>
+      var canvas = document.querySelector("#unity-canvas");
+
+      function unityShowBanner(msg, type) {
+        var warningBanner = document.querySelector("#unity-warning");
+        function updateBannerVisibility() {
+          warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+        }
+        var div = document.createElement('div');
+        div.innerHTML = msg;
+        warningBanner.appendChild(div);
+        if (type == 'error') div.style = 'background: red; padding: 10px;';
+        else {
+          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+          setTimeout(function() {
+            warningBanner.removeChild(div);
+            updateBannerVisibility();
+          }, 5000);
+        }
+        updateBannerVisibility();
+      }
+
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/Web -v8.loader.js";
+      var config = {
+        arguments: [],
+        dataUrl: buildUrl + "/Web -v8.data.unityweb",
+        frameworkUrl: buildUrl + "/Web -v8.framework.js.unityweb",
+        codeUrl: buildUrl + "/Web -v8.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Emzee Games",
+        productName: "Jelly Path",
+        productVersion: "1.0.0",
+        showBanner: unityShowBanner,
+      };
+
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+        document.querySelector("#unity-container").className = "unity-mobile";
+        canvas.className = "unity-mobile";
+      } else {
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+        canvas.style.setProperty('max-width', 'calc(100vh * (9 / 16))');
+      }
+
+      document.querySelector("#unity-loading-screen").style.display = "flex";
+
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          document.querySelector("#unity-progress-bar-full").style.width = 93 * progress + "%";
+              }).then((unityInstance) => {
+              }).catch((message) => {
+                alert(message);
+              });
+            };
+
+      document.body.appendChild(script);
+      
+      window.HideUnityLoadingScreen = function() {
+          document.querySelector("#unity-loading-screen").style.display = "none";
+      };
+    </script>
+  </body>
+</html>
